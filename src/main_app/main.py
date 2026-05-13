@@ -6,7 +6,7 @@ def hello():
 
 def goodbye():
     """Функция прощания"""
-    print("Goodbye!")
+    print("Goodbye! 123")
 
 if __name__ == "__main__":
     hello()
