@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # Микросервис для проверки названий треков
+  track_validator:
+    build: src/track_validator
+    container_name: beatball_track_validator
+    ports:
+      - "5001:5001"
+    networks:
+      - beatball_network
+    restart: unless-stopped
+
+  # Микросервис для уведомлений об изменении рейтинга
+  rating_notifier:
+    build: src/rating_notifier
+    container_name: beatball_rating_notifier
+    ports:
+      - "5002:5002"
+    networks:
+      - beatball_network
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs  # Сохраняем логи на хост-машину
+
+networks:
+  beatball_network:
+    driver: bridge
